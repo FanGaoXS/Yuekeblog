@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wqk.blog.mapper.MessageMapper">
+    <select id="selectAllMessage" resultType="Message">
+        SELECT
+            *
+        FROM
+            message
+        ORDER BY time DESC
+    </select>
+    <insert id="insertMessage" parameterType="Message">
+        INSERT INTO
+            message
+        (message,name,time)
+        VALUES
+        (#{message},#{name},#{time})
+    </insert>
+</mapper>

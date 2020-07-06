@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>about-YuekeBlog</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" th:href="@{/res/layui/css/layui.css}">
+	<link rel="stylesheet" th:href="@{/res/static/css/mian.css}">
+</head>
+<body class="lay-blog">
+		<!--顶栏取自common里的fragment-->
+		<div th:insert="~{front/commons/common::topBar(nav='about.html')}"></div>
+		<!--中间栏：内容-->
+		<div class="container-wrap">
+			<div class="container container-message container-details container-about">
+				<div class="contar-wrap">
+					<div class="item">
+						<div class="item-box" style="color: grey">
+							<h2 style="color: #0C0C0C">关于我</h2>
+							<hr class="layui-bg-gray">
+							<p>一个末流二本师范院校计算机专业学生，目前大三。一个目标“远大”的码农。</p>
+							<span>你也可以通过以下方式联系到我：</span>
+							<ul>
+								<li><img th:src="@{/res/static/images/icon/wechat.png}" alt="wechat"> 微 信：woooooooooqk_com（9个o）</li>
+								<li><img th:src="@{/res/static/images/icon/gmail.png}" alt="gmail"> 邮 箱：a954278478@gmail.com</li>
+							</ul>
+							<br>
+							<h2 style="color: #0C0C0C">关于本站</h2>
+							<hr class="layui-bg-gray">
+							<p>当前版本version1.3</p>
+							<span>目前架构</span>
+							<ul>
+								<li>前端：<code>Layui</code></li>
+								<li>后端：<code>SpringBoot+Mybatis+Thymeleaf+Shiro+MySQL</code></li>
+							</ul>
+							<br>
+							<span>所有代码均已托管到github和gitee，同时遵循Apache License 2.0，禁止商用</span>
+							<ul>
+								<li><img th:src="@{/res/static/images/icon/github.png}" alt="github"> github：<a href="https://github.com/FanGaoXS/Yuekeblog" target="_blank">https://github.com/FanGaoXS/Yuekeblog</a></li>
+								<li><img th:src="@{/res/static/images/icon/gitee.png}" alt="gitee"> gitee：<a href="https://gitee.com/FanGaoXS/Yuekeblog" target="_blank">https://gitee.com/FanGaoXS/Yuekeblog</a></li>
+							</ul>
+							<br>
+							<p>如果喜欢的话请记得给我star，谢谢。</p>
+							<h2 style="color: #0C0C0C">感谢</h2>
+							<hr class="layui-bg-gray">
+							<p><a href="https://space.bilibili.com/95256449" target="_blank">狂神说JAVA（哔哩哔哩UP主）</a></p>
+							<!--引用块-->
+							<blockquote class="layui-elem-quote layui-quote-nm">
+								程序员能拥有自己的博客，本身就是一件特别Geek的事情。
+								<br>——<a href="https://space.bilibili.com/384068749" target="_blank">Code Sheep（哔哩哔哩UP主）</a>
+							</blockquote>
+							<h2 style="color: #0C0C0C">说明</h2>
+							<hr class="layui-bg-gray">
+							<p>本站文章仅代表个人观点，和任何组织或个人无关。</p>
+							<div class="count layui-clear">
+								<span class="pull-left">阅读 <em>100000+</em></span>
+								<span class="pull-right like"><i class="layui-icon layui-icon-praise"></i><em>999</em></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--底栏，取自common里的fragment-->
+		<div th:insert="~{front/commons/common::bottomBar}"></div>
+		<script th:src="@{/res/layui/layui.js}"></script>
+	<script>
+		layui.config({
+			base: '/res/static/js/'
+		}).use('blog');
+	</script>
+</body>
+</html>

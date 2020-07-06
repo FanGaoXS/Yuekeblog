@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wqk.blog.mapper.UserMapper">
+    <select id="selectUserByUsername" parameterType="string" resultMap="userMap">
+        SELECT
+            u.*,p.*
+        FROM
+            user u,
+            perm p,
+            user_perm up
+        WHERE
+            u.username=#{username}
+            AND up.uid=u.uid
+            AND p.pid=up.pid
+    </select>
+    <resultMap id="userMap" type="user">
+        <id property="uid" column="uid"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="nickname" column="nickname"/>
+        <result property="sex" column="sex"/>
+        <result property="email" column="email"/>
+        <association property="perm" javaType="perm">
+            <id property="pid" column="pid"/>
+            <result property="pname" column="pname"/>
+            <result property="pdetail" column="pdetail"/>
+            <result property="url" column="url"/>
+        </association>
+    </resultMap>
+    <insert id="insertUser1" parameterType="user" useGeneratedKeys="true" keyProperty="uid">
+        INSERT INTO
+            user
+            (username,password,nickname)
+        VALUES
+            (#{username},#{password},'游客')
+    </insert>
+    <insert id="insertUser2" parameterType="integer">
+        INSERT INTO
+            user_perm
+            (uid,pid)
+        VALUES
+            (#{uid},3)
+    </insert>
+</mapper>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>comment-YuekeBlog</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" th:href="@{/res/layui/css/layui.css}">
+	<link rel="stylesheet" th:href="@{/res/static/css/mian.css}">
+</head>
+<body class="lay-blog">
+		<!--顶栏取自common里的fragment-->
+		<div th:insert="~{front/commons/common::topBar}"></div>
+		<!--中间栏：内容-->
+		<div class="container-wrap">
+			<div class="container container-message container-details container-comment">
+					<div class="contar-wrap">
+						<div class="item">
+							<div class="item-box  layer-photos-demo1 layer-photos-demo">
+								<h3 th:text="${article.getTitle()}">文章标题</h3>
+								<h5>发布于：<span th:text="${#dates.format(article.getTime(), 'yyyy/M月/d日 HH:mm')}">发布时间</span></h5>
+								<p th:text="${article.getContent()}">文章内容</p>
+								<!--<img th:src="@{/res/static/images/item.png}" alt="帅哥">-->
+								<div class="count layui-clear">
+									<span class="pull-left">阅读 <em>100000+</em></span>
+									<span class="pull-right like"><i class="layui-icon layui-icon-praise"></i><em>999</em></span>
+								</div>
+							</div>
+						</div>	
+						<form class="layui-form" th:action="@{/newComment}">
+							<div class="layui-form-item layui-form-text">
+								<textarea name="comment" class="layui-textarea" style="resize:none" placeholder="随便写点什么吧" required maxlength="100"></textarea>
+							</div>
+							<input type="hidden" name="aid" th:value="${article.getAid()}">
+							<div class="btnbox">
+									<input type="submit" class="layui-btn layui-btn-normal" value="好了">
+							</div>
+						</form>
+					</div>
+			</div>
+		</div>
+		<!--底栏，取自common里的fragment-->
+		<div th:insert="~{front/commons/common::bottomBar}"></div>
+		<script th:src="@{/res/layui/layui.js}"></script>
+	<script>
+		layui.config({
+		  base: '/res/static/js/'
+		}).use('blog');
+	</script>
+	<script id="LAY-msg-tpl" type="text/html">
+		<div class="info-box">
+			<div class="info-item">
+				<img class="info-img" src="{{ d.avatar }}" alt="">
+			  <div class="info-text">
+					<p class="title">
+					  <span class="name">{{ d.username }}</span>
+					  <span class="info-img">
+					  	<i class="layui-icon layui-icon-praise"></i>
+					  	{{ d.praise }}
+					 	</span>
+					</p>
+					<p class="info-intr">
+						{{ d.content }}
+					</p>
+			  </div>
+			</div>
+		</div>
+	</script>
+</body>
+</html>

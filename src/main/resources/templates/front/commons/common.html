@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--顶栏-->
+<div class="header" th:fragment="topBar">
+    <div class="header-wrap">
+        <h1 class="logo pull-left">
+            <a th:href="@{/index}">
+                <img th:src="@{/res/static/images/logo.png}" alt="" class="logo-img">
+                <img th:src="@{/res/static/images/logo-text.png}" alt="" class="logo-text">
+            </a>
+        </h1>
+        <form class="layui-form blog-seach pull-left" th:action="@{/likeTitle}">
+            <div class="layui-form-item blog-sewrap">
+                <div class="layui-input-block blog-sebox">
+                    <i class="layui-icon layui-icon-search"></i>
+                    <input type="text" name="title" lay-verify="title" autocomplete="off" class="layui-input" required>
+                </div>
+            </div>
+        </form>
+        <div class="blog-nav pull-right">
+            <!--PC端-->
+            <ul class="layui-nav pull-left">
+                <!--从shiro里取session，根据session来判断，如果没有登录就不显示发表按钮-->
+                <li th:if="${#session}!=null" th:class="${nav=='article.html'?'layui-nav-item layui-this':'layui-nav-item'}"><a th:href="@{/toArticle}">发表</a></li>
+                <li th:class="${nav=='index.html'?'layui-nav-item layui-this':'layui-nav-item'}"><a th:href="@{/toIndex}">首页</a></li>
+                <li th:class="${nav=='message.html'?'layui-nav-item layui-this':'layui-nav-item'}"><a th:href="@{/toMessage}">留言</a></li>
+                <li th:class="${nav=='about.html'?'layui-nav-item layui-this':'layui-nav-item'}"><a th:href="@{/toAbout}">关于</a></li>
+                <li th:class="${nav=='login.html'?'layui-nav-item layui-this':'layui-nav-item'}" lay-unselect="">
+                    <a th:href="@{/toLogin}" class="personal pull-left">
+                        <i class="layui-icon layui-icon-username"></i>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <!--根据session来判断，如果已经登录了就显示用户的昵称和退出登录按钮-->
+                        <dd><a th:if="${#session}!=null" th:text="${#session.getAttribute('nickname')}">昵称</a></dd>
+                        <dd><a th:if="${#session}!=null" th:href="@{/logout}">退出登录</a></dd>
+                        <!--根据session来判断，如果没有登录了就显示我要登录按钮-->
+                        <dd><a th:if="${#session}==null" th:href="@{/toLogin}">我要登录</a></dd>
+                        <dd><a href="javascript:;">修改信息</a></dd>
+                        <dd><a href="javascript:;">安全管理</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile-nav pull-right" id="mobile-nav">
+            <a href="javascript:;">
+                <i class="layui-icon layui-icon-more"></i>
+            </a>
+        </div>
+    </div>
+    <!--手机端-->
+    <ul class="pop-nav" id="pop-nav">
+        <li><a th:if="${#session}!=null" th:href="@{/toArticle}">发表</a></li>
+        <li><a th:href="@{/toIndex}">首页</a></li>
+        <li><a th:href="@{/toMessage}">留言</a></li>
+        <li><a th:href="@{/toAbout}">关于</a></li>
+        <!--根据session来判断，如果没有登录就显示登录按钮-->
+        <li><a th:if="${#session}==null" th:href="@{/toLogin}">登录</a></li>
+        <!--根据session来判断，如果登录了就显示退出按钮-->
+        <li><a th:if="${#session}!=null" th:href="@{/logout}">退出</a></li>
+    </ul>
+</div>
+<!--底栏-->
+<div class="footer" th:fragment="bottomBar">
+    <p>
+        <span>&copy; 2020</span>
+        <span><a href="#" target="_blank">yueke.cloud</a></span>
+        <span>version 1.3</span>
+    </p>
+    <p><span><a href="http://www.beian.miit.gov.cn/" target="_blank">渝ICP备20006007号</a></span></p>
+    <p><span>wqk版权所有</span></p>
+</div>
+</html>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wqk.blog.mapper.ArticleMapper">
+    <select id="selectAllArticle" resultType="Article">
+        SELECT
+            *
+        FROM
+            article
+        ORDER BY time DESC
+    </select>
+    <select id="selectArticleByAid" parameterType="integer" resultType="Article">
+        SELECT
+            *
+        FROM
+            article
+        WHERE
+            aid=#{aid}
+    </select>
+    <!--<select id="selectArticleByAid" parameterType="integer" resultMap="ArticleAndComment">
+        SELECT
+            a.*,c.*
+        FROM
+            article a,
+            comment c,
+            article_comment ac
+        WHERE
+            a.aid=#{aid}
+            AND ac.aid=a.aid
+            AND c.cid=ac.cid
+    </select>
+    <resultMap id="ArticleAndComment" type="Article">
+        <id property="aid" column="aid"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="time" column="time"/>
+        <result property="picture" column="picture"/>
+        <collection property="commentList" ofType="Comment">
+            <id property="cid" column="cid"/>
+            <result property="cname" column="cname"/>
+            <result property="comment" column="comment"/>
+            <result property="time" column="time"/>
+        </collection>
+    </resultMap>-->
+    <select id="selectArticleLikeTitle" parameterType="string" resultType="Article">
+        SELECT
+            *
+        FROM
+            article
+        WHERE
+            title LIKE "%"#{title}"%"
+        ORDER BY time DESC
+    </select>
+    <insert id="insertArticle" parameterType="Article"
+            useGeneratedKeys="true" keyProperty="aid">
+        INSERT INTO
+            article
+            (title,content,time,picture)
+        VALUES
+            (#{title},#{content},#{time},#{picture})
+    </insert>
+</mapper>

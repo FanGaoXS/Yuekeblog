@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wqk.blog.mapper.CommentMapper">
+    <select id="selectCommentByAid" parameterType="integer" resultType="Comment">
+        SELECT
+            c.*
+        FROM
+            comment c,
+            article_comment ac
+        WHERE
+            ac.aid=#{aid}
+            AND c.cid=ac.cid
+        ORDER BY c.time DESC
+    </select>
+    <insert id="insertComment1" parameterType="Comment"
+            useGeneratedKeys="true" keyProperty="cid">
+        INSERT INTO
+            comment
+            (cname,comment,time)
+        VALUES
+            (#{cname},#{comment},#{time})
+    </insert>
+    <insert id="insertComment2">
+        INSERT INTO
+            article_comment
+            (aid,cid)
+        VALUES
+            (#{aid},#{cid})
+    </insert>
+</mapper>
