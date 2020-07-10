@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class LoginController {
     @Autowired
@@ -36,9 +38,10 @@ public class LoginController {
     }
     //用户注销
     @RequestMapping("/logout")
-    public String logout(){
+    public String logout(HttpSession session){
         Subject subject= SecurityUtils.getSubject();
         subject.logout();
+        session.invalidate();
         return "redirect:/index";
     }
 }

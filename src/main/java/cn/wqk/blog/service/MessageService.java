@@ -7,8 +7,23 @@ import java.util.List;
 
 @Service
 public interface MessageService {
-    //查询所有留言
+
+    /**
+     * 顺序查询所有留言
+     * @return
+     */
     List<Message> selectAllMessage();
-    //新增留言，true留言成功，false留言失败
-    boolean insertMessage(Message message);
+
+    /**
+     * 根据时间倒序查询所有留言
+     * @return
+     */
+    List<Message> selectAllMessageOrderByDesc();
+
+    /**
+     * 新增留言
+     * @param messageStr 留言内容
+     * @return 返回留言编号，失败返回-1
+     */
+    int insertMessage(String messageStr);
 }

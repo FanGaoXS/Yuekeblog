@@ -1,20 +1,24 @@
-package cn.wqk.blog.service;
+package cn.wqk.blog.service.impl;
 
 import cn.wqk.blog.mapper.ArticleMapper;
 import cn.wqk.blog.pojo.Article;
+import cn.wqk.blog.service.ArticleService;
+import cn.wqk.blog.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 @Service
-public class ArticleServiceImpl implements ArticleService{
+public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
     @Override
     public List<Article> selectAllArticle() {
         return articleMapper.selectAllArticle();
+    }
+
+    @Override
+    public List<Article> selectAllArticleOrderByDesc() {
+        return articleMapper.selectAllArticleOrderByDesc();
     }
 
     @Override
@@ -28,14 +32,12 @@ public class ArticleServiceImpl implements ArticleService{
     }
 
     @Override
-    public boolean insertArticle(Article article) {
-        Timestamp time = new Timestamp(new Date().getTime());
-        article.setTime(time);
-        int i = articleMapper.insertArticle(article);
-        if (i>0){
-            return true;
-        }else {
-            return false;
-        }
+    public int insertArticle(String title, String content) {
+        Article article = new Article();
+        article.setTitle(title);
+        article.setContent(content);
+        article.setTime(DateUtils.nowDateTime());
+        articleMapper.insertArticle(article);
+        return article.getAid();
     }
 }

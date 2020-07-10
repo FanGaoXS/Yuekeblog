@@ -8,8 +8,19 @@ import java.util.List;
 
 @Service
 public interface CommentService {
-    //根据文章编号查询该文章下的评论
-    List<Comment> selectCommentByAid(@Param("aid")int aid);
-    //新增评论，true新增成功，false新增失败
-    boolean insertComment(int aid,Comment comment);
+
+    /**
+     * 根据文章号查询该文章下的评论
+     * @param aid（文章编号）
+     * @return
+     */
+    List<Comment> selectCommentByAid(int aid);
+
+    /**
+     * 根据文章编号插入评论
+     * @param aid 文章编号
+     * @param commentStr 评论内容
+     * @return 评论编号 返回-1代表错误
+     */
+    int insertComment(int aid,String commentStr);
 }

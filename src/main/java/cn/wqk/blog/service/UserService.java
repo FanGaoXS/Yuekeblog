@@ -5,8 +5,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    //根据用户名查询用户以及他的权限（登录用）
+
+    /**
+     * 根据用户名查询用户是否存在
+     * @param username
+     * @return 存在返回User对象，不存在则返回null
+     */
     User selectUserByUsername(String username);
-    //用户注册（true注册成功）
-    boolean userRegister(User user);
+
+    /**
+     * 新用户注册
+     * @param username 用户名
+     * @param password 密码
+     * @param nickname 昵称
+     * @return 成功返回用户编号，否则返回-1
+     */
+    int userRegister(String username,
+                     String password,
+                     String nickname);
 }

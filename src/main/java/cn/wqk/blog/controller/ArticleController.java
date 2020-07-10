@@ -26,9 +26,8 @@ public class ArticleController {
     //新增文章
     @RequestMapping("/newArticle")
     public String newArticle(Article article){
-        boolean b = articleService.insertArticle(article);
-        if (b){//如果新增成功，重定向到该文章的详情页面，并且传递aid
-            int aid=article.getAid();
+        int aid = articleService.insertArticle(article.getTitle(), article.getContent());
+        if (aid!=-1){//如果新增成功，重定向到该文章的详情页面，并且传递aid
             return "redirect:/toDetail"+"?aid="+aid;
         }else {//如果新增失败，则返回发表文章的页面
             return "redirect:toArticle";

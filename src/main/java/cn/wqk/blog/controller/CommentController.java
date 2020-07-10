@@ -16,8 +16,8 @@ public class CommentController {
     //发表评论
     @RequestMapping("/newComment")
     public String newComment(@RequestParam("aid")int aid, Comment comment){
-        boolean b = commentService.insertComment(aid, comment);
-        if (b){//如果新增评论成功，重定向到该文章的详情页面
+        int cid = commentService.insertComment(aid,comment.getComment());
+        if (cid!=-1){//如果新增评论成功，重定向到该文章的详情页面
             return "redirect:/toDetail"+"?aid="+aid;
         }else {//如果新增评论失败，则重定向到评论页面
             return "redirect:/toComment";

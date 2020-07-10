@@ -35,9 +35,12 @@ public class UserRealm extends AuthorizingRealm {
         if (user==null){//如果用户不存在
             return null;//抛出异常UnknownAccountException
         }
+        //获取当前登录对象
         Subject subject = SecurityUtils.getSubject();
+        //获取当前的session
         Session session = subject.getSession();
-        session.setAttribute("nickname",user.getNickname());
+        //向当前对象的session里存值
+        session.setAttribute("loginUser",user);
         //返回密码
         return new SimpleAuthenticationInfo(user,user.getPassword(),"");
     }

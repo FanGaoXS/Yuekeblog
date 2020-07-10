@@ -29,18 +29,19 @@
             <result property="url" column="url"/>
         </association>
     </resultMap>
-    <insert id="insertUser1" parameterType="user" useGeneratedKeys="true" keyProperty="uid">
+    <insert id="insertUser1" parameterType="user"
+            useGeneratedKeys="true" keyProperty="uid">
         INSERT INTO
             user
             (username,password,nickname)
         VALUES
-            (#{username},#{password},'游客')
+            (#{username},#{password},#{nickname})
     </insert>
-    <insert id="insertUser2" parameterType="integer">
+    <insert id="insertUser2">
         INSERT INTO
             user_perm
             (uid,pid)
         VALUES
-            (#{uid},3)
+            (#{uid},#{pid})
     </insert>
 </mapper>

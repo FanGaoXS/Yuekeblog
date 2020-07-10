@@ -39,4 +39,5 @@ public class Article{
      * 文章图片路径
      */
     private String picture;
+
 }

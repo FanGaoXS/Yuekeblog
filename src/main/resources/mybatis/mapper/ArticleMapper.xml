@@ -8,6 +8,12 @@
             *
         FROM
             article
+    </select>
+    <select id="selectAllArticleOrderByDesc" resultType="Article">
+        SELECT
+            *
+        FROM
+            article
         ORDER BY time DESC
     </select>
     <select id="selectArticleByAid" parameterType="integer" resultType="Article">

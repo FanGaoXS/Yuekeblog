@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro">
 <!--顶栏-->
 <div class="header" th:fragment="topBar">
     <div class="header-wrap">
@@ -21,7 +22,7 @@
             <!--PC端-->
             <ul class="layui-nav pull-left">
                 <!--从shiro里取session，根据session来判断，如果没有登录就不显示发表按钮-->
-                <li th:if="${#session}!=null" th:class="${nav=='article.html'?'layui-nav-item layui-this':'layui-nav-item'}"><a th:href="@{/toArticle}">发表</a></li>
+                <li shiro:hasPermission="admin" th:class="${nav=='article.html'?'layui-nav-item layui-this':'layui-nav-item'}"><a th:href="@{/toArticle}">发表</a></li>
                 <li th:class="${nav=='index.html'?'layui-nav-item layui-this':'layui-nav-item'}"><a th:href="@{/toIndex}">首页</a></li>
                 <li th:class="${nav=='message.html'?'layui-nav-item layui-this':'layui-nav-item'}"><a th:href="@{/toMessage}">留言</a></li>
                 <li th:class="${nav=='about.html'?'layui-nav-item layui-this':'layui-nav-item'}"><a th:href="@{/toAbout}">关于</a></li>
@@ -64,7 +65,7 @@
     <p>
         <span>&copy; 2020</span>
         <span><a href="#" target="_blank">yueke.cloud</a></span>
-        <span>version 1.4</span>
+        <span>version 1.5</span>
     </p>
     <p><span><a href="http://www.beian.miit.gov.cn/" target="_blank">渝ICP备20006007号</a></span></p>
     <p><span>wqk版权所有</span></p>

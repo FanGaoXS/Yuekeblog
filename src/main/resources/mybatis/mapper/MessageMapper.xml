@@ -8,6 +8,12 @@
             *
         FROM
             message
+    </select>
+    <select id="selectAllMessageOrderByDesc" resultType="Message">
+        SELECT
+            *
+        FROM
+            message
         ORDER BY time DESC
     </select>
     <insert id="insertMessage" parameterType="Message">

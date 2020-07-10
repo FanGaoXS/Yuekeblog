@@ -43,5 +43,9 @@ public class User {
      * 邮箱
      */
     private String email;
+
+    /**
+     * 权限
+     */
     private Perm perm;
 }
