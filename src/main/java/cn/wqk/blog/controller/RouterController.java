@@ -38,7 +38,7 @@ public class RouterController {
     //去到首页，并且展示所有文章
     @RequestMapping({"/toIndex","/index","/"})
     public String toIndex(Model model){
-        List<Article> articleList = articleService.selectAllArticle();
+        List<Article> articleList = articleService.selectAllArticleOrderByDesc();
         model.addAttribute("articleList",articleList);
         return "front/index";
     }
